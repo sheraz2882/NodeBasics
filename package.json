@@ -1,0 +1,24 @@
+{
+  "name": "nodebasics",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sheraz2882/nodebasics.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/sheraz2882/nodebasics/issues"
+  },
+  "homepage": "https://github.com/sheraz2882/nodebasics#readme",
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
