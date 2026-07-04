@@ -59,6 +59,45 @@ app.post("/api/players", (req, res) => {
   res.send(player);
 });
 
+app.put("/api/players/:id", (req, res) => {
+  //Look up the player
+  //If not existing, return 404
+  const player = players.find((p) => p.id === parseInt(req.params.id));
+  if (!player)
+    return res.status(404).send("The Player with given ID Not Found");
+
+  //Validate
+  //If invalid, return 400 - Bad request
+  const schema = Joi.object({
+    name: Joi.string().min(3).required(),
+  });
+
+  const { value, error } = schema.validate(req.body);
+
+  if (error) {
+    res.status(400).send(error.details[0].message);
+  }
+
+  //Update player
+  player.name = value.name;
+  //Return the updated player
+  res.send(player);
+});
+
+app.delete("/api/players/:id", (req, res) => {
+  //Look up the player
+  const player = players.find((p) => p.id === parseInt(req.params.id));
+  if (!player)
+    return res.status(404).send("The Player with the Given ID not Found");
+
+  //Delete Operation
+  const index = players.indexOf(player);
+  players.slice(index, 1);
+
+  //Return the Deleted Object
+  res.send(player);
+});
+
 const port = process.env.port || 3000;
 app.listen(port, () => {
   console.log("Server is running on http://localhost:3000");
