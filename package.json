@@ -20,6 +20,8 @@
   "homepage": "https://github.com/sheraz2882/nodebasics#readme",
   "dependencies": {
     "express": "^5.2.1",
-    "joi": "^18.2.3"
+    "joi": "^18.2.3",
+    "mongodb": "^7.4.0",
+    "mongoose": "^9.7.3"
   }
 }
