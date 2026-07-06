@@ -32,6 +32,36 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
+//get api for fetching a product by id
+app.get("/api/product/:id", async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    res.status(200).json(product);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
+app.put("/api/product/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const product = await Product.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const updatedProduct = await Product.findById(id); // Fetch the updated product
+    res.status(200).json(updatedProduct);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+});
+
 mongoose
   .connect(
     "mongodb+srv://helpfinderdb:4aIZteNFbSZY9tpB@cluster0.k5bgrh8.mongodb.net/?appName=Cluster0",
